@@ -12,7 +12,7 @@ import RxSwift
 import Then
 import SnapKit
 
-final class GitViewController: UIViewController {
+final class GitViewController: UIViewController, ViewControllerType {
 
     // MARK: - Typealias
     typealias ViewModel = GitViewModel
@@ -23,7 +23,6 @@ final class GitViewController: UIViewController {
     private var totalCountLabel = UILabel()
     
     // MARK: - Properties
-    var viewModel: GitViewModel!
     var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Intializer
@@ -39,14 +38,10 @@ final class GitViewController: UIViewController {
         setupUI()
         setupConstraints()
         setupAttributes()
-        
-        bindViewModel()
     }
 
     // MARK: - Bind
-    func bindViewModel() {
-        assert(viewModel != nil)
-        
+    func bind(viewModel: GitViewModel) {        
         let input = GitViewModel.Input(
             inputText: searchController.searchBar.rx.text.orEmpty.asObservable()
         )
