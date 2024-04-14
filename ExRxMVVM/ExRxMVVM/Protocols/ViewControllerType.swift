@@ -25,8 +25,20 @@ protocol ViewControllerType: AnyObject {
 
 extension ViewControllerType {
     private var underlyingViewModel: ViewModel? {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.viewModel) as? ViewModel }
-        set { objc_setAssociatedObject(self, &AssociatedKeys.viewModel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get {
+            return objc_getAssociatedObject(
+                self,
+                &AssociatedKeys.viewModel
+            ) as? ViewModel
+        }
+        set {
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.viewModel,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
+        }
     }
     
     var viewModel: ViewModel? {

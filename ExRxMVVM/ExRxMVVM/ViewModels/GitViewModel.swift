@@ -33,10 +33,8 @@ final class GitViewModel: ViewModelType {
             .filter { !$0.isEmpty }
             .flatMapLatest {
                 self.apiWorker.fetchRepositorySearch($0)
-                    .do { print("Repository Fetch Result: \(String(data: $0, encoding: .utf8))") }
             }
-            .decode(of: Repository.self)
-            .map { $0.items }
+            .debug()
             .asDriver(onErrorJustReturn: [])
         
         let totalCount = repositories
